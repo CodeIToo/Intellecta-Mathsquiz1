@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Intellecta</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- ==============================
+       NAVIGATION BAR
+  ============================== -->
+  <nav class="navbar">
+    <div class="nav-logo" id="nav-logo">
+      <span class="nav-sigma">∑</span> INTELLECTA<span class="accent"></span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-btn active" data-page="home">HOME</button>
+      <button class="nav-btn" data-page="about">ABOUT</button>
+      <button class="nav-btn" data-page="contact">CONTACT</button>
+    </div>
+    <button class="nav-hamburger" id="nav-hamburger">☰</button>
+  </nav>
+
+  <!-- Mobile dropdown menu -->
+  <div class="mobile-menu hidden" id="mobile-menu">
+    <button class="mobile-nav-btn" data-page="home">HOME</button>
+    <button class="mobile-nav-btn" data-page="about">ABOUT</button>
+    <button class="mobile-nav-btn" data-page="contact">CONTACT</button>
+  </div>
+
+
+  <!-- ==============================
+       PAGE: HOME
+  ============================== -->
+  <div id="page-home" class="page active">
+
+    <!-- SCREEN 1: Welcome / Setup -->
+    <div id="screen-welcome" class="screen active">
+      <div class="card welcome-card">
+        <div class="blueprint-lines"></div>
+        <div class="welcome-content">
+          <div class="logo-badge">∑</div>
+          <h1 class="title">INTELLEC<span class="accent">TA</span></h1>
+          <p class="subtitle">Mathematics Quiz — Test Your Knowledge</p>
+
+          <!-- STEP 1: Difficulty -->
+          <div class="level-section">
+            <p class="level-label">① SELECT DIFFICULTY</p>
+            <div class="level-buttons">
+              <button class="level-btn" data-level="beginner">
+                <span class="level-icon">🟢</span>
+                <span class="level-name">BEGINNER</span>
+                <span class="level-desc">Fundamentals</span>
+              </button>
+              <button class="level-btn" data-level="intermediate">
+                <span class="level-icon">🟡</span>
+                <span class="level-name">INTERMEDIATE</span>
+                <span class="level-desc">Core Concepts</span>
+              </button>
+              <button class="level-btn" data-level="advanced">
+                <span class="level-icon">🔴</span>
+                <span class="level-name">PRO LEVEL</span>
+                <span class="level-desc">Advanced Topics</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 2: Topic Selection -->
+          <div class="topic-section">
+            <p class="level-label">② CHOOSE TOPICS <span class="label-hint">(tap to toggle)</span></p>
+            <div class="topic-grid">
+              <button class="topic-btn active" data-topic="limits">
+                <span class="topic-icon">📈</span>
+                <span class="topic-name">Limits &amp; Continuity</span>
+              </button>
+              <button class="topic-btn active" data-topic="differentiation">
+                <span class="topic-icon">∂</span>
+                <span class="topic-name">Differentiation</span>
+              </button>
+              <button class="topic-btn active" data-topic="integration">
+                <span class="topic-icon">∫</span>
+                <span class="topic-name">Integration</span>
+              </button>
+              <button class="topic-btn active" data-topic="matrices">
+                <span class="topic-icon">⬛</span>
+                <span class="topic-name">Matrices</span>
+              </button>
+              <button class="topic-btn active" data-topic="complex">
+                <span class="topic-icon">ℂ</span>
+                <span class="topic-name">Complex Numbers</span>
+              </button>
+            </div>
+            <p id="topic-warning" class="topic-warning hidden">⚠ Please select at least one topic!</p>
+          </div>
+
+          <button id="btn-start" class="btn-primary">START QUIZ →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: Quiz -->
+    <div id="screen-quiz" class="screen">
+      <div class="card quiz-card">
+        <div class="quiz-topbar">
+          <span id="topic-tag" class="topic-tag">LIMITS</span>
+          <div class="timer-box">
+            <span class="timer-icon">⏱</span>
+            <span id="timer-display">30</span>s
+          </div>
+        </div>
+        <div class="progress-track">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <div class="progress-label">
+          <span id="q-counter">Q 1 / 10</span>
+          <span id="score-live">Score: 0</span>
+        </div>
+        <div class="question-box">
+          <p id="question-text" class="question-text">Loading question...</p>
+        </div>
+        <div id="options-container" class="options-container"></div>
+        <p id="skip-warning" class="skip-warning hidden">⚠ Please select an answer first!</p>
+        <button id="btn-next" class="btn-primary">NEXT →</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: Results -->
+    <div id="screen-result" class="screen">
+      <div class="card result-card">
+        <div class="result-content">
+          <div id="result-emoji" class="result-emoji">🏆</div>
+          <h2 id="result-title" class="result-title">EXCELLENT!</h2>
+          <p id="result-score" class="result-score">You scored <strong>0 / 10</strong></p>
+          <p id="result-message" class="result-message">Outstanding performance!</p>
+          <div class="score-bar-track">
+            <div id="score-bar-fill" class="score-bar-fill"></div>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-box">
+              <span id="stat-correct" class="stat-num">0</span>
+              <span class="stat-lbl">CORRECT</span>
+            </div>
+            <div class="stat-box">
+              <span id="stat-wrong" class="stat-num">0</span>
+              <span class="stat-lbl">WRONG</span>
+            </div>
+            <div class="stat-box">
+              <span id="stat-level" class="stat-num">--</span>
+              <span class="stat-lbl">LEVEL</span>
+            </div>
+          </div>
+          <div class="result-buttons">
+            <button id="btn-restart" class="btn-primary">↺ RESTART</button>
+            <button id="btn-change-level" class="btn-secondary">CHANGE SETTINGS</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-home -->
+
+
+  <!-- ==============================
+       PAGE: ABOUT
+  ============================== -->
+  <div id="page-about" class="page">
+    <div class="static-page-wrapper">
+      <div class="card static-card">
+
+        <div class="static-hero">
+          <div class="logo-badge">∑</div>
+          <h2 class="static-title">About <span class="accent">Intellecta</span></h2>
+          <p class="static-tagline">A smarter way to practice mathematics</p>
+        </div>
+
+        <div class="static-body">
+
+          <div class="about-block">
+            <h3>📚 What is Intellecta?</h3>
+            <p>Intellecta is an interactive mathematics quiz platform designed for students studying core calculus and algebra topics. Whether you're preparing for exams or sharpening your skills, Intellecta offers timed, topic-specific challenges across multiple difficulty levels.</p>
+          </div>
+
+          <div class="about-block">
+            <h3>🎯 Topics Covered</h3>
+            <div class="about-topic-grid">
+              <div class="about-topic-card">
+                <span>📈</span>
+                <strong>Limits &amp; Continuity</strong>
+                <p>Convergence, L'Hôpital's rule, and continuity theorems.</p>
+              </div>
+              <div class="about-topic-card">
+                <span>∂</span>
+                <strong>Differentiation</strong>
+                <p>Chain rule, implicit differentiation, higher-order derivatives.</p>
+              </div>
+              <div class="about-topic-card">
+                <span>∫</span>
+                <strong>Integration</strong>
+                <p>Definite &amp; indefinite integrals, substitution, by-parts.</p>
+              </div>
+              <div class="about-topic-card">
+                <span>⬛</span>
+                <strong>Matrices</strong>
+                <p>Determinants, eigenvalues, rank, and matrix operations.</p>
+              </div>
+              <div class="about-topic-card">
+                <span>ℂ</span>
+                <strong>Complex Numbers</strong>
+                <p>Argand plane, modulus-argument form, Euler's identity.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-block">
+            <h3>⚙️ How It Works</h3>
+            <ol class="how-list">
+              <li>Choose your <strong>difficulty level</strong> — Beginner, Intermediate, or Pro.</li>
+              <li>Pick the <strong>topics</strong> you want to be tested on.</li>
+              <li>Answer questions within a <strong>30-second timer</strong> per question.</li>
+              <li>Get instant <strong>colour-coded feedback</strong> on each answer.</li>
+              <li>See your <strong>score, stats, and performance badge</strong> at the end.</li>
+            </ol>
+          </div>
+
+          <div class="about-block">
+            <h3>🏆 Difficulty Levels</h3>
+            <div class="level-info-grid">
+              <div class="level-info-card green">
+                <strong>🟢 Beginner</strong>
+                <p>Fundamental concepts and direct formula applications.</p>
+              </div>
+              <div class="level-info-card yellow">
+                <strong>🟡 Intermediate</strong>
+                <p>Multi-step problems requiring conceptual understanding.</p>
+              </div>
+              <div class="level-info-card red">
+                <strong>🔴 Pro Level</strong>
+                <p>Advanced theory, proofs, and complex problem-solving.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="btn-primary" onclick="navigateTo('home')">START QUIZ →</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==============================
+       PAGE: CONTACT
+  ============================== -->
+  <div id="page-contact" class="page">
+    <div class="static-page-wrapper">
+      <div class="card static-card">
+
+        <div class="static-hero">
+          <div class="logo-badge">✉</div>
+          <h2 class="static-title">Contact <span class="accent">Us</span></h2>
+          <p class="static-tagline">We'd love to hear from you</p>
+        </div>
+
+        <div class="static-body">
+
+          <!-- Team Section -->
+          <div class="about-block">
+            <h3>👩‍💻 Meet the Team</h3>
+            <div class="team-grid">
+
+              <!-- Jasleen -->
+              <div class="team-card">
+                <img class="team-avatar-img" src="https://api.dicebear.com/7.x/adventurer/svg?seed=Jasleen&backgroundColor=e8631a&backgroundType=solid&radius=50" alt="Jasleen" />
+                <div class="team-info">
+                  <strong class="team-name">Jasleen</strong>
+                  <span class="team-role">Co-Creator &amp; Developer</span>
+                  <div class="team-links">
+                    <a href="mailto:jasleen12@gmail.com" class="team-link">
+                      <span>📧</span> jasleen12@gmail.com
+                    </a>
+                    <a href="https://instagram.com/jasleen.codes" target="_blank" class="team-link">
+                      <span>📸</span> @jasleen.codes
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Kavya -->
+              <div class="team-card">
+                <img class="team-avatar-img" src="https://api.dicebear.com/7.x/adventurer/svg?seed=Kavya&backgroundColor=b84a10&backgroundType=solid&radius=50" alt="Kavya" />
+                <div class="team-info">
+                  <strong class="team-name">Kavya</strong>
+                  <span class="team-role">Co-Creator &amp; Designer</span>
+                  <div class="team-links">
+                    <a href="mailto:kavyaa343@gmail.com" class="team-link">
+                      <span>📧</span> kavyaa343@gmail.com
+                    </a>
+                    <a href="https://instagram.com/kavya.creates" target="_blank" class="team-link">
+                      <span>📸</span> @kavya.creates
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Contact Info + Form -->
+          <div class="contact-grid">
+
+            <div class="contact-info">
+              <div class="contact-card">
+                <span class="contact-icon">📧</span>
+                <div>
+                  <strong>Jasleen</strong>
+                  <p>jasleen12@gmail.com</p>
+                </div>
+              </div>
+              <div class="contact-card">
+                <span class="contact-icon">📧</span>
+                <div>
+                  <strong>Kavya</strong>
+                  <p>kavyaa343@gmail.com</p>
+                </div>
+              </div>
+              <div class="contact-card">
+                <span class="contact-icon">📸</span>
+                <div>
+                  <strong>Instagram — Jasleen</strong>
+                  <p>@jasleen.codes</p>
+                </div>
+              </div>
+              <div class="contact-card">
+                <span class="contact-icon">📸</span>
+                <div>
+                  <strong>Instagram — Kavya</strong>
+                  <p>@kavya.creates</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-form-wrap">
+              <p class="form-heading">Send a Message</p>
+              <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" id="contact-name" class="form-input" placeholder="e.g. Aryan Sharma" />
+              </div>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="contact-email" class="form-input" placeholder="you@example.com" />
+              </div>
+              <div class="form-group">
+                <label>Subject</label>
+                <input type="text" id="contact-subject" class="form-input" placeholder="Bug report / Suggestion / Other" />
+              </div>
+              <div class="form-group">
+                <label>Message</label>
+                <textarea id="contact-message" class="form-input form-textarea" placeholder="Write your message here..."></textarea>
+              </div>
+              <button class="btn-primary" id="btn-send-msg">SEND MESSAGE ✉</button>
+              <p id="form-success" class="form-success hidden">✅ Message sent! We'll get back to you soon.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
